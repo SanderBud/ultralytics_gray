@@ -24,7 +24,7 @@ build-backend = "setuptools.build_meta"
 
 # Project settings -----------------------------------------------------------------------------------------------------
 [project]
-name = "ultralytics-gray"
+name = "ultralytics_gray"
 dynamic = ["version"]
 description = "Ultralytics YOLO 🚀 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification."
 readme = "README.md"
