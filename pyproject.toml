@@ -24,7 +24,7 @@ build-backend = "setuptools.build_meta"
 
 # Project settings -----------------------------------------------------------------------------------------------------
 [project]
-name = "ultralytics_gray"
+name = "ultralytics"
 dynamic = ["version"]
 description = "Ultralytics YOLO 🚀 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification."
 readme = "README.md"
@@ -131,8 +131,8 @@ extra = [
 "Changelog" = "https://github.com/ultralytics/ultralytics/releases"
 
 [project.scripts]
-yolo = "ultralytics_gray.cfg:entrypoint"
-ultralytics = "ultralytics_gray.cfg:entrypoint"
+yolo = "ultralytics.cfg:entrypoint"
+ultralytics = "ultralytics.cfg:entrypoint"
 
 # Tools settings -------------------------------------------------------------------------------------------------------
 [tool.setuptools]  # configuration specific to the `setuptools` build backend.
@@ -150,9 +150,9 @@ markers = [
 norecursedirs = [".git", "dist", "build"]
 
 [tool.coverage.run]
-source = ["ultralytics_gray/"]
+source = ["ultralytics/"]
 data_file = "tests/.coverage"
-omit = ["ultralytics_gray/utils/callbacks/*"]
+omit = ["ultralytics/utils/callbacks/*"]
 
 [tool.isort]
 line_length = 120
