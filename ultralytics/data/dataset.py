@@ -174,6 +174,7 @@ class YOLODataset(BaseDataset):
 
     def build_transforms(self, hyp=None):
         """Builds and appends transforms to the list."""
+        self.augment = False
         if self.augment:
             hyp.mosaic = hyp.mosaic if self.augment and not self.rect else 0.0
             hyp.mixup = hyp.mixup if self.augment and not self.rect else 0.0
@@ -427,6 +428,7 @@ class ClassificationDataset:
         self.root = self.base.root
 
         # Initialize attributes
+        self.ch = 1
         if augment and args.fraction < 1.0:  # reduce training fraction
             self.samples = self.samples[: round(len(self.samples) * args.fraction)]
         self.prefix = colorstr(f"{prefix}: ") if prefix else ""
@@ -462,13 +464,15 @@ class ClassificationDataset:
         f, j, fn, im = self.samples[i]  # filename, index, filename.with_suffix('.npy'), image
         if self.cache_ram:
             if im is None:  # Warning: two separate if statements required here, do not combine this with previous line
-                im = self.samples[i][3] = cv2.imread(f)
+                #im = self.samples[i][3] = cv2.imread(f)
+                im = self.samples[i][3] = cv2.imread(f, cv2.IMREAD_GRAYSCALE)
         elif self.cache_disk:
             if not fn.exists():  # load npy
                 np.save(fn.as_posix(), cv2.imread(f), allow_pickle=False)
             im = np.load(fn)
         else:  # read image
-            im = cv2.imread(f)  # BGR
+            #im = cv2.imread(f)  # BGR
+            im = cv2.imread(f, cv2.IMREAD_GRAYSCALE)
         # Convert NumPy array to PIL image
         im = Image.fromarray(cv2.cvtColor(im, cv2.COLOR_BGR2RGB))
         sample = self.torch_transforms(im)
